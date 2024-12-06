@@ -170,8 +170,11 @@ namespace _2024Project
             //플레이어 타일 세팅
             Tile player = new Tile();
             PlayerCreate(ref player);
+
             Point backPoint = new Point();
             backPoint.SetPosition(0, 0);
+
+            int backIndex = 0;
 
             while (true)
             {
@@ -288,17 +291,6 @@ namespace _2024Project
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
                             style = Maps[mapIndex][point.y - 1, point.x].style;
-                            //Console.WriteLine(style);
-                            //backMapIndex = mapIndex;
-
-                            if (style != TileStyle.Wall)
-                            {
-
-                                player.point.y -= rect[mapIndex].height;
-                                player.index -= rect[mapIndex].value;
-
-                            }
-                            
 
                             //if (style != TileStyle.Wall)
                             //{
@@ -308,7 +300,14 @@ namespace _2024Project
                             //    player.index -= rect[mapIndex].value;
                             //}
 
+                            if (style != TileStyle.Wall)
+                            {
 
+                                player.point.y -= rect[mapIndex].height;
+                                player.index -= rect[mapIndex].value;
+
+                            }
+                            
                         }
                         break;
 
@@ -320,8 +319,7 @@ namespace _2024Project
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
                             style = Maps[mapIndex][point.y + 1, point.x].style;
-                            //bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
-
+                         
                             if (style != TileStyle.Wall)
                             {
 
@@ -329,9 +327,6 @@ namespace _2024Project
                                 player.index += rect[mapIndex].value;
 
                             }
-
-
-
                         }
 
                         break;
@@ -343,16 +338,11 @@ namespace _2024Project
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
                             style = Maps[mapIndex][point.y, point.x - 1].style;
 
-                           // bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
-
                             if (style != TileStyle.Wall)
                             {
                                 player.point.x -= rect[mapIndex].width;
                                 player.index -= 1;
                             }
-
-
-
                         }
 
                         break;
@@ -365,13 +355,10 @@ namespace _2024Project
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
                             style = Maps[mapIndex][point.y, point.x + 1].style;
-                            //bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
-
+                    
                             if (style != TileStyle.Wall)
                             {
-
-                                player.point.x += rect[mapIndex].width;
-                                
+                                player.point.x += rect[mapIndex].width;                                
                                 player.index += 1;
                             }
 
@@ -379,21 +366,33 @@ namespace _2024Project
                         break;
                 }
 
-                //이벤트 타일값 받기 
-                //backPoint = player.point;
+                
 
+
+                //이벤트 타일값 받기 
+                //키입력 바로 안에 있던거 이동.
+                //던전 , 마을 , 상점 , 여관으로 이동했을시 좌표와 인덱스값 초기화.
                 bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
                 if (isEvent == true)
                 {
-                    if(style == TileStyle.Dungeon ||
-                       style == TileStyle.Village ||
-                       style == TileStyle.Shop ||
+                    if(style == TileStyle.Dungeon   ||
+                       style == TileStyle.Village   ||
+                       style == TileStyle.Shop      ||
                        style == TileStyle.Inn )
                     {
+                        //어딘가로 이동할때 바로전 정보 저장
+                        backPoint = player.point;
+                        backIndex = player.index;
                         player.index = 1;
                         player.point.SetPosition(1, 1);
                     }
 
+                    //게이트 입장시 바로 이전 장소로 이동. 좌표 인덱스 저장
+                    if (style == TileStyle.Gate)
+                    {
+                        player.index = backIndex;
+                        player.point = backPoint;
+                    }
                 }
 
             }
@@ -411,7 +410,7 @@ namespace _2024Project
             //backindex = index;
             Random rnd = new Random();
             int rndNum;
-
+            
 
             //Console.SetCursorPosition(30, 30);
             Console.WriteLine(moveStyle);
