@@ -253,7 +253,7 @@ namespace _2024Project
                 //13 14 15 16     30 31 32 33
 
                 TileStyle style = new TileStyle();
-
+                player.style = Maps[mapIndex][point.y, point.x].style;
 
                 //입력받은 키로 좌표이동
                 switch (myKey.Key)
@@ -290,24 +290,15 @@ namespace _2024Project
                             style = Maps[mapIndex][point.y - 1, point.x].style;
                             //Console.WriteLine(style);
                             //backMapIndex = mapIndex;
-                            //bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
 
-                            //if (style != TileStyle.Wall)
-                            //{
-                            //    //벽이 아니고,이벤트타일일때.
+                            if (style != TileStyle.Wall)
+                            {
 
-                            //    //player.point.SetPosition(1, 1);
-                            //    //player.index = 1;
-                            //    if (isEvent)
-                            //    {
-                            //        //player.point.SetPosition(1, 1);
-                            //        player.index = 1;
-                            //    }
                                 player.point.y -= rect[mapIndex].height;
                                 player.index -= rect[mapIndex].value;
 
-                            //}
-
+                            }
+                            
 
                             //if (style != TileStyle.Wall)
                             //{
@@ -322,6 +313,7 @@ namespace _2024Project
                         break;
 
                     case ConsoleKey.S:
+
                         if (player.point.y + rect[mapIndex].height < rect[mapIndex].value * rect[mapIndex].height)
                         {
 
@@ -330,27 +322,16 @@ namespace _2024Project
                             style = Maps[mapIndex][point.y + 1, point.x].style;
                             //bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
 
-                            //if (style != TileStyle.Wall)
-                            //{
-                            //    if (isEvent)
-                            //    {
-                                    //player.point.SetPosition(1, 1);
-                                    //player.index = 1;
-                                //}
+                            if (style != TileStyle.Wall)
+                            {
 
                                 player.point.y += rect[mapIndex].height;
                                 player.index += rect[mapIndex].value;
 
+                            }
 
 
 
-                            //}
-
-                            //if (style != TileStyle.Wall)
-                            //{
-
-
-                            //}
                         }
 
                         break;
@@ -362,23 +343,16 @@ namespace _2024Project
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
                             style = Maps[mapIndex][point.y, point.x - 1].style;
 
-                            //bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
+                           // bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
 
-                            //if (style != TileStyle.Wall)
-                            //{
-                            //    if (isEvent)
-                            //    {
-                            //        player.point.SetPosition(1, 1);
-                            //        player.index = 1;
-                            //    }
+                            if (style != TileStyle.Wall)
+                            {
+                                player.point.x -= rect[mapIndex].width;
+                                player.index -= 1;
+                            }
 
 
-                            //    player.point.x -= rect[mapIndex].width;
-                            //    player.index -= 1;
 
-                            //}
-                            player.point.x -= rect[mapIndex].width;
-                            player.index -= 1;
                         }
 
                         break;
@@ -387,33 +361,40 @@ namespace _2024Project
 
                         if (player.point.x + rect[mapIndex].width < rect[mapIndex].value * rect[mapIndex].width)
                         {
-                             
+
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
                             style = Maps[mapIndex][point.y, point.x + 1].style;
                             //bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
 
-                            //if (style != TileStyle.Wall)
-                            //{
-                            //if (isEvent)
-                            //{
-                            //player.point.SetPosition(1, 1);
-                            //player.index = 1;
-                            //}
+                            if (style != TileStyle.Wall)
+                            {
 
-
-                            //player.point.x += rect[mapIndex].width;
-                            //player.index += 1;
-
-                            player.point.x += rect[mapIndex].width;
-                            player.index += 1;
-                            //}
+                                player.point.x += rect[mapIndex].width;
+                                
+                                player.index += 1;
+                            }
 
                         }
                         break;
                 }
 
+                //이벤트 타일값 받기 
+                //backPoint = player.point;
 
+                bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
+                if (isEvent == true)
+                {
+                    if(style == TileStyle.Dungeon ||
+                       style == TileStyle.Village ||
+                       style == TileStyle.Shop ||
+                       style == TileStyle.Inn )
+                    {
+                        player.index = 1;
+                        player.point.SetPosition(1, 1);
+                    }
+
+                }
 
             }
 
@@ -477,11 +458,12 @@ namespace _2024Project
 
                 case TileStyle.Gate:
 
+                    Console.WriteLine("여기 오긴해?");
                     switch ((MapsName)index)
                     {
                         case MapsName.Inn:
                             index = (int)MapsName.Village;
-                            // ply.point = backPoint;
+                             //ply.point = backPoint;
                             break;
                         case MapsName.Shop:
                             index = (int)MapsName.Village;
