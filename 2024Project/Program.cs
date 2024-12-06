@@ -65,6 +65,8 @@ namespace _2024Project
         public int value;                   //value x value 제작할 사이즈 조절용        
     }
 
+
+
     internal class Program
     {
 
@@ -392,10 +394,16 @@ namespace _2024Project
                     {
                         player.index = backIndex;
                         player.point = backPoint;
+                        backIndex = 1;
+                        backPoint.SetPosition(1, 1);
                     }
                 }
 
             }
+
+        }
+        static void BattleEvent()
+        {
 
         }
 
@@ -426,55 +434,44 @@ namespace _2024Project
 
                 case TileStyle.Village:
                     index = (int)MapsName.Village;
-                    //backPoint = ply.point;
-                    //ply.point.SetPosition(1, 1);
-                    //ply.index = 1;
+
                     break;
 
                 case TileStyle.Dungeon:
                     index = (int)MapsName.Dungeon;
-                    //backPoint = ply.point;
 
-                    //ply.point.SetPosition(1, 1);
-                    //ply.index = 1;
                     break;
 
                 case TileStyle.Shop:
                     index = (int)MapsName.Shop;
-                    //backPoint = ply.point;
 
-                    //ply.point.SetPosition(1, 1);
-                    //ply.index = 1;
                     break;
 
                 case TileStyle.Inn:
                     index = (int)MapsName.Inn;
-                    //backPoint = ply.point;
 
-                    //ply.point.SetPosition(1, 1);
-                    //ply.index = 1;
                     break;
 
                 case TileStyle.Gate:
 
-                    Console.WriteLine("여기 오긴해?");
+
                     switch ((MapsName)index)
                     {
                         case MapsName.Inn:
                             index = (int)MapsName.Village;
-                             //ply.point = backPoint;
+
                             break;
                         case MapsName.Shop:
                             index = (int)MapsName.Village;
-                            //ply.point = backPoint;
+
                             break;
                         case MapsName.Dungeon:
                             index = (int)MapsName.World;
-                            //ply.point = backPoint;
+
                             break;
                         case MapsName.Village:
                             index = (int)MapsName.World;
-                            //ply.point = backPoint;
+
                             break;
                         default:
                             Console.WriteLine("이거 오면 안되는디?");
@@ -512,6 +509,7 @@ namespace _2024Project
                     }
 
                     break;
+
                 case TileStyle.Mountain:
                     rndNum = rnd.Next(0, 10);
 
@@ -520,6 +518,7 @@ namespace _2024Project
                         //몬스터 배틀이벤트
                     }
                     break;
+
                 case TileStyle.Sea:
                     rndNum = rnd.Next(0, 10);
 
@@ -539,12 +538,6 @@ namespace _2024Project
                     result = false;
                     break;
             }
-
-            //if(TileStyle.Gate == )
-            //Console.WriteLine(ply.index);
-            //Console.WriteLine(ply.point.x);
-            //Console.WriteLine(ply.point.y);
-
 
             return result;
         }
