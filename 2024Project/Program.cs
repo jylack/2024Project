@@ -10,61 +10,6 @@ using System.Threading.Tasks;
 
 namespace _2024Project
 {
-    struct Point
-    {
-        public int x;
-        public int y;
-
-        public void SetPosition(int num1, int num2)
-        {
-            x = num1;
-            y = num2;
-        }
-    }
-    enum MapsName
-    {
-        World, Dungeon, Village,
-        Shop, Inn
-    }
-
-    //시작과 끝만 내뚜고 다 쓸지도? Inn은 여관
-    enum TileStyle
-    {
-        start = 0,
-        //제일 바깥 타일들
-        Village, Dungeon, Field, Mountain, Sea,
-        //마을 내부 타일들
-        Shop, Inn, Wall, Road,
-        //동작? 타일들
-        Monster, RandomBox, Player, NPC,
-        //상세메뉴 타일들
-        Shop_menu, Inn_menu, Battle_menu,
-        //작동
-        Eat, Rest, Gate,
-        //던전 내부 타일들       
-        end
-    }
-
-    struct Tile
-    {
-        public string Image;
-        public Point point;
-        public TileStyle style;
-        public int index;
-        //쓸줄알았는데 아직안씀.
-        //public ConsoleColor color;
-    }
-
-    //멥별 테두리 박스설정
-    struct RectCase
-    {
-        public int[,] backGroundIndex;      //각 배열 인덱스값
-        public string[] backGround;         //인덱스별로 가지고있을 특수문자.
-        public int width;                   //각 박스별 너비
-        public int height;                  //각 박스별 높이
-        public int value;                   //value x value 제작할 사이즈 조절용        
-    }
-
 
 
     internal class Program
@@ -81,59 +26,77 @@ namespace _2024Project
             //2번 마을 박스
             //3번 샵 박스
             //4번 여관 박스
-            RectCase[] rect = new RectCase[5];
+           // RectCase[] mapsCase = new RectCase[5];
 
+           // Console.ForegroundColor = ConsoleColor.Green;
 
             int mapIndex = 0;
             //int backMapIndex = 0;
 
             //0번 월드 박스
             //value x value 사이즈 멥크기 생성하기위한 값
-            rect[0].value = 7;
-            //칸마다 너비조절.
-            rect[0].width = 10;
-            //칸마다 높이조절
-            rect[0].height = 3;
-            //박스생성
-            //RectCreate(rect[0]);
+            //mapsCase[0] = new RectCase(7, 10, 3);
 
-            //1번 던전박스
-            rect[1].value = 7;
-            rect[1].width = 10;
-            rect[1].height = 3;
+            ////rect[0].value = 7;
+            //////칸마다 너비조절.
+            ////rect[0].width = 10;
+            //////칸마다 높이조절
+            ////rect[0].height = 3;
+            ////박스생성
+            ////RectCreate(rect[0]);
 
-            //2번 마을 박스
-            rect[2].value = 4;
-            rect[2].width = 10;
-            rect[2].height = 3;
+            ////1번 던전박스
+            //mapsCase[1] = new RectCase(7, 10, 3);
 
-            //3번 샵 박스
-            rect[3].value = 2;
-            rect[3].width = 10;
-            rect[3].height = 3;
+            ////rect[1].value = 7;
+            ////rect[1].width = 10;
+            ////rect[1].height = 3;
 
-            //4번 여관 박스
-            rect[4].value = 2;
-            rect[4].width = 10;
-            rect[4].height = 3;
+            ////2번 마을 박스
+            //mapsCase[2] = new RectCase(4, 10, 3);
+
+            ////rect[2].value = 4;
+            ////rect[2].width = 10;
+            ////rect[2].height = 3;
+
+            ////3번 샵 박스
+            //mapsCase[3] = new RectCase(2, 10, 3);
+
+            ////rect[3].value = 2;
+            ////rect[3].width = 10;
+            ////rect[3].height = 3;
+
+            ////4번 여관 박스
+            //mapsCase[4] = new RectCase(2, 10, 3);
+
+            ////rect[4].value = 2;
+            ////rect[4].width = 10;
+            ////rect[4].height = 3;
 
 
             //전체멥 정보
-            List<Tile[,]> Maps = new List<Tile[,]>();
+            List<RectCase> Maps = new List<RectCase>();
+            Maps.Add(new RectCase(7, 10, 3));
+            Maps.Add(new RectCase(7, 10, 3));
+            Maps.Add(new RectCase(4, 10, 3));
+            Maps.Add(new RectCase(2, 10, 3));
+            Maps.Add(new RectCase(2, 10, 3));
 
-            //플레이어에게 보여줄 멥들
-            Tile[,] worldTile = new Tile[rect[0].value, rect[0].value];
-            Tile[,] dugeonTile = new Tile[rect[1].value, rect[1].value];
-            Tile[,] villageTile = new Tile[rect[2].value, rect[2].value];
-            Tile[,] shopTile = new Tile[rect[3].value, rect[3].value];
-            Tile[,] innTile = new Tile[rect[4].value, rect[4].value];
+            // List<Tile[,]> Maps = new List<Tile[,]>();
 
-            //플레이어에게 보여줄 멥들 전체멥에 추가
-            Maps.Add(worldTile);
-            Maps.Add(dugeonTile);
-            Maps.Add(villageTile);
-            Maps.Add(shopTile);
-            Maps.Add(innTile);
+            ////플레이어에게 보여줄 멥들
+            //Tile[,] worldTile = new Tile[rect[0].value, rect[0].value];
+            //Tile[,] dugeonTile = new Tile[rect[1].value, rect[1].value];
+            //Tile[,] villageTile = new Tile[rect[2].value, rect[2].value];
+            //Tile[,] shopTile = new Tile[rect[3].value, rect[3].value];
+            //Tile[,] innTile = new Tile[rect[4].value, rect[4].value];
+
+            ////플레이어에게 보여줄 멥들 전체멥에 추가
+            //Maps.Add(worldTile);
+            //Maps.Add(dugeonTile);
+            //Maps.Add(villageTile);
+            //Maps.Add(shopTile);
+            //Maps.Add(innTile);
 
 
             //뭔가 값을 안넣어서 터지고있음
@@ -145,11 +108,12 @@ namespace _2024Project
                 //처음에 리스트 안에 안들어가길래 temp로 임시저장후 넣었다가 생각해보니 그냥 반환값으로 가져오면 쉬웠음.
                 //Tile[,] temp = Maps[i];
                 //멥정보 생성.
-                Maps[i] = CreateMap(Maps[i], rect[i], i);
+                Maps[i].tile = CreateMap(Maps[i].tile, Maps[i], i);
+                
                 //Maps[i] = temp;
 
                 //테두리 생성
-                RectCreate(ref rect[i]);
+                RectCreate(Maps[i]);
 
                 //이거없으면 멥이 너무 작을경우 이미지값이 겹침.
                 //random 함수떄문인듯.
@@ -173,8 +137,8 @@ namespace _2024Project
             Tile player = new Tile();
             PlayerCreate(ref player);
 
-            Point backPoint = new Point();
-            backPoint.SetPosition(0, 0);
+            Point backPoint = new Point(0, 0);
+
 
             int backIndex = 0;
 
@@ -182,9 +146,10 @@ namespace _2024Project
             {
                 Console.Clear();
 
+
                 //백그라운드 만들어줌 - 테두리 선만 말하는것.
                 //RectCreate(rect[mapIndex]);
-                RectDrawing(ref rect[mapIndex]);
+                RectDrawing( Maps[mapIndex]);
 
                 /* 테스트용 코드
                 //Console.WriteLine("🎪🧱🧱🏔️⛰️🌋🗻🛤️🏕️🏞️🛣️🏖️🏚️🏠🏡🏘️🏨🏪🏬🏢♨️😀😁😄▥♤♧◎⊙▣◈▒▤▦▩〓────━⊙🛺🧙🧚🧛🦄🧝‍♂️🧟🧖");
@@ -201,12 +166,12 @@ namespace _2024Project
                 */
 
                 //백그라운드 위에 지정된 멥 타일 이미지 올림.
-                for (int i = 0; i < Maps[mapIndex].GetLength(0); i++)
+                for (int i = 0; i < Maps[mapIndex].rect.GetLength(0); i++)
                 {
-                    for (int j = 0; j < Maps[mapIndex].GetLength(1); j++)
+                    for (int j = 0; j < Maps[mapIndex].rect.GetLength(1); j++)
                     {
-                        Console.SetCursorPosition(Maps[mapIndex][i, j].point.x, Maps[mapIndex][i, j].point.y);
-                        Console.Write(Maps[mapIndex][i, j].Image);
+                        Console.SetCursorPosition(Maps[mapIndex].tile[i, j].point.x, Maps[mapIndex].tile[i, j].point.y);
+                        Console.Write(Maps[mapIndex].tile[i, j].Image);
 
                     }
                 }
@@ -216,15 +181,15 @@ namespace _2024Project
                 Console.WriteLine(player.Image);
 
                 //플레이어 현재 어디쯤있나 인덱스 찍어줌
-                Console.SetCursorPosition(rect[mapIndex].width * rect[mapIndex].value + 1,
-                                            rect[mapIndex].height * rect[mapIndex].value + 1);
+                Console.SetCursorPosition(Maps[mapIndex].rect[0,0].width * Maps[mapIndex].length + 1,
+                                            Maps[mapIndex].rect[0, 0].height * Maps[mapIndex].length + 1);
 
                 //현재 위치 멥 몇번 테스트용
                 Console.WriteLine($"현재 인덱스 : [{player.index}]번 ");
 
                 //현재 멥 뭔지 테스트용
-                Console.SetCursorPosition(rect[mapIndex].width * rect[mapIndex].value + 1,
-                                            rect[mapIndex].height * rect[mapIndex].value + 3);
+                Console.SetCursorPosition(Maps[mapIndex].rect[0,0].width * Maps[mapIndex].length + 1,
+                                            Maps[mapIndex].rect[0, 0].height * Maps[mapIndex].length + 3);
                 //멥 인덱스 호출용 0~5번 맨 위에 리스트에 넣은 순서대로임.
                 Console.WriteLine((MapsName)mapIndex);
 
@@ -232,15 +197,15 @@ namespace _2024Project
                 //현재 그리드 좌표 알수있나 테스트
                 Point point = new Point();
                 //플레이어가 있는 인덱스값을 받아서 멥의 몇번째 배열칸인지 알아내는 코드             
-                point = TileIndexSerch(Maps[mapIndex], player.index);
+                point = TileIndexSerch(Maps[mapIndex].tile, player.index);
 
-                Console.SetCursorPosition(rect[mapIndex].width * rect[mapIndex].value + 1,
-                rect[mapIndex].height * rect[mapIndex].value + 5);
+                Console.SetCursorPosition(Maps[mapIndex].rect[0,0].width * Maps[mapIndex].length + 1,
+                Maps[mapIndex].rect[0, 0].height * Maps[mapIndex].length + 5);
 
 
 
                 Console.WriteLine($"jx = {point.x} ,iy = {point.y} " +
-                    $"현재 있는 멥타일 이름 {Maps[mapIndex][point.y, point.x].style}");
+                    $"현재 있는 멥타일 이름 {Maps[mapIndex].tile[point.y, point.x].style}");
 
 
 
@@ -258,7 +223,7 @@ namespace _2024Project
                 //13 14 15 16     30 31 32 33
 
                 TileStyle style = new TileStyle();
-                player.style = Maps[mapIndex][point.y, point.x].style;
+                player.style = Maps[mapIndex].tile[point.y, point.x].style;
 
                 //입력받은 키로 좌표이동
                 switch (myKey.Key)
@@ -288,45 +253,45 @@ namespace _2024Project
 
                     case ConsoleKey.W:
 
-                        if (player.point.y - rect[mapIndex].height > 0)
+                        if (player.point.y - Maps[mapIndex].rect[0, 0].height > 0)
                         {
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
-                            style = Maps[mapIndex][point.y - 1, point.x].style;
+                            style = Maps[mapIndex].tile[point.y - 1, point.x].style;
 
                             //if (style != TileStyle.Wall)
                             //{
                             //    //Player.point 의 포인터는 배열의 ij값이 아니라 콘솔창의 콘솔좌표값이다.
                             //    //이거 햇갈려서 해결에 오래걸림..
-                            //    player.point.y -= rect[mapIndex].height;
-                            //    player.index -= rect[mapIndex].value;
+                            //    player.point.y -= Maps[mapIndex].rect[0, 0].height;
+                            //    player.index -= Maps[mapIndex].length;
                             //}
 
                             if (style != TileStyle.Wall)
                             {
 
-                                player.point.y -= rect[mapIndex].height;
-                                player.index -= rect[mapIndex].value;
+                                player.point.y -= Maps[mapIndex].rect[0, 0].height;
+                                player.index -= Maps[mapIndex].length;
 
                             }
-                            
+
                         }
                         break;
 
                     case ConsoleKey.S:
 
-                        if (player.point.y + rect[mapIndex].height < rect[mapIndex].value * rect[mapIndex].height)
+                        if (player.point.y + Maps[mapIndex].rect[0, 0].height < Maps[mapIndex].length * Maps[mapIndex].rect[0, 0].height)
                         {
 
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
-                            style = Maps[mapIndex][point.y + 1, point.x].style;
-                         
+                            style = Maps[mapIndex].tile[point.y + 1, point.x].style;
+
                             if (style != TileStyle.Wall)
                             {
 
-                                player.point.y += rect[mapIndex].height;
-                                player.index += rect[mapIndex].value;
+                                player.point.y += Maps[mapIndex].rect[0, 0].height;
+                                player.index += Maps[mapIndex].length;
 
                             }
                         }
@@ -334,15 +299,15 @@ namespace _2024Project
                         break;
 
                     case ConsoleKey.A:
-                        if (player.point.x - rect[mapIndex].width > 0)
+                        if (player.point.x - Maps[mapIndex].rect[0,0].width > 0)
                         {
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
-                            style = Maps[mapIndex][point.y, point.x - 1].style;
+                            style = Maps[mapIndex].tile[point.y, point.x - 1].style;
 
                             if (style != TileStyle.Wall)
                             {
-                                player.point.x -= rect[mapIndex].width;
+                                player.point.x -= Maps[mapIndex].rect[0,0].width;
                                 player.index -= 1;
                             }
                         }
@@ -351,16 +316,16 @@ namespace _2024Project
 
                     case ConsoleKey.D:
 
-                        if (player.point.x + rect[mapIndex].width < rect[mapIndex].value * rect[mapIndex].width)
+                        if (player.point.x + Maps[mapIndex].rect[0,0].width < Maps[mapIndex].length * Maps[mapIndex].rect[0,0].width)
                         {
 
                             //TileStyle style = new TileStyle();
                             //가독성을 위해 임시로 현재 플레이어가 있는 위치 바로 위 타일의 타일스타일 넣어줌.
-                            style = Maps[mapIndex][point.y, point.x + 1].style;
-                    
+                            style = Maps[mapIndex].tile[point.y, point.x + 1].style;
+
                             if (style != TileStyle.Wall)
                             {
-                                player.point.x += rect[mapIndex].width;                                
+                                player.point.x += Maps[mapIndex].rect[0,0].width;
                                 player.index += 1;
                             }
 
@@ -368,19 +333,16 @@ namespace _2024Project
                         break;
                 }
 
-                
-
-
                 //이벤트 타일값 받기 
                 //키입력 바로 안에 있던거 이동.
                 //던전 , 마을 , 상점 , 여관으로 이동했을시 좌표와 인덱스값 초기화.
                 bool isEvent = EventTileSerch(ref mapIndex, ref player, ref backPoint, style);
                 if (isEvent == true)
                 {
-                    if(style == TileStyle.Dungeon   ||
-                       style == TileStyle.Village   ||
-                       style == TileStyle.Shop      ||
-                       style == TileStyle.Inn )
+                    if (style == TileStyle.Dungeon ||
+                       style == TileStyle.Village ||
+                       style == TileStyle.Shop ||
+                       style == TileStyle.Inn)
                     {
                         //어딘가로 이동할때 바로전 정보 저장
                         backPoint = player.point;
@@ -399,12 +361,19 @@ namespace _2024Project
                     }
                 }
 
+
+
             }
 
         }
         static void BattleEvent()
         {
+            while (true)
+            {
+                Console.Clear();
 
+
+            }
         }
 
         //이벤트 타일 인지 아닌지 체크 후 이동할수 있는 타일이면 이동.
@@ -418,7 +387,7 @@ namespace _2024Project
             //backindex = index;
             Random rnd = new Random();
             int rndNum;
-            
+
 
             //Console.SetCursorPosition(30, 30);
             Console.WriteLine(moveStyle);
@@ -636,7 +605,7 @@ namespace _2024Project
         }
 
         //타일 기본세팅
-        static void TileSeting(ref Tile[,] tile, RectCase rect)
+        static void TileSeting( Tile[,] tile, RectCase rect)
         {
             int temp = 1;
             for (int i = 0; i < tile.GetLength(0); i++)
@@ -644,7 +613,7 @@ namespace _2024Project
                 for (int j = 0; j < tile.GetLength(1); j++)
                 {
 
-                    tile[i, j].point.SetPosition(2 + (j * rect.width), 2 + (i * rect.height));
+                    tile[i, j].point.SetPosition(2 + (j * rect.rect[0,0].width), 2 + (i * rect.rect[0, 0].height));
                     tile[i, j].style = TileStyle.start;
                     tile[i, j].index = temp;
                     tile[i, j].Image = "　";
@@ -680,18 +649,27 @@ namespace _2024Project
         }
 
         //만들어둔 멥 테두리를 그려준다.
-        static void RectDrawing(ref RectCase rect)
+        static void RectDrawing(RectCase rect)
         {
             //`Console.Clear();
-            for (int i = 0; i < rect.backGround.GetLength(0); i++)
+            //for (int i = 0; i < rect.backGround.GetLength(0); i++)
+            //{
+            //    Console.WriteLine(rect.backGround[i]);
+            //}
+
+            for(int i = 0;i < rect.tile.GetLength(0); i++)
             {
-                Console.WriteLine(rect.backGround[i]);
+                for(int j = 0; j < rect.tile.GetLength(1);j++)
+                {
+                    Console.Write(rect.tile[i,j].Image);    
+                }
+                Console.WriteLine();
             }
 
         }
 
         //원하는 숫자를 입력하면 num x num 사이즈 타일(=박스)가 생성됨
-        static void RectCreate(ref RectCase rect)
+        static void RectCreate(RectCase rect)
         {
             /* 잘나오나 테스트용
             //
@@ -728,122 +706,128 @@ namespace _2024Project
 
 
             //백그라운드에 이미지 몇번이 들어갔는지 정해줄변수.width
-            rect.backGroundIndex = new int[1 + (rect.height * rect.value), 1 + (rect.width * rect.value)];
+            //rect.backGroundIndex = new int[1 + (rect.rect[0, 0].height * rect.length), 1 + (rect.rect[0, 0].width * rect.length)];
+            
+            //rect.backGround = new string[rect.backGroundIndex.GetLength(0)];
 
-            rect.backGround = new string[rect.backGroundIndex.GetLength(0)];
+            //string str = "";
+            //char c = 'a';
+            //for (int i = 0; i < rect.backGroundIndex.GetLength(1); i++)
+            //{
+            //    str += c;
+            //}
 
-            string str = "";
-            char c = 'a';
-            for (int i = 0; i < rect.backGroundIndex.GetLength(1); i++)
-            {
-                str += c;
-            }
-
-            for (int i = 0; i < rect.backGroundIndex.GetLength(0); i++)
-            {
-                rect.backGround[i] = str;
-            }
+            //for (int i = 0; i < rect.backGroundIndex.GetLength(0); i++)
+            //{
+            //    rect.backGround[i] = str;
+            //}
 
             //백그라운드안에들어갈 요소들의 좌표 초기화
-            for (int i = 0; i < rect.backGroundIndex.GetLength(0); i++)
+            for (int i = 0; i < rect.tile.GetLength(0); i++)
             {
-                for (int j = 0; j < rect.backGroundIndex.GetLength(1); j++)
+                for (int j = 0; j < rect.tile.GetLength(1); j++)
                 {
 
                     // 홀수 줄일때만 ㅡ 넣어줌width
-                    if (i % rect.height == 0)
+                    if (i % rect.rect[0,0].height == 0)
                     {
-                        rect.backGroundIndex[i, j] = 5;
+                        rect.tile[i, j].Image = ImageBackGrounds[5].ToString();
 
                     }
                     //숫자를 넣어줄 공간~ 즉 빈공간
                     else// if (i % 2 == 0)
                     {
-                        rect.backGroundIndex[i, j] = 0;
+                        rect.tile[i, j].Image = ImageBackGrounds[0].ToString();
+
+                      
 
                     }
 
                     //╋ 교차점
-                    if (i % rect.height == 0 && j % rect.width == 0 && j > 0 && j < rect.backGroundIndex.GetLength(1) - 1)
+                    if (i % rect.rect[0,0].height == 0 && j % rect.rect[0, 0].width == 0 && j > 0 && j < rect.tile.GetLength(1) - 1)
                     {
-                        rect.backGroundIndex[i, j] = 9;
+                        rect.tile[i, j].Image = ImageBackGrounds[9].ToString();
+
                     }
                     //┫ = 11
                     //맨 오른쪽 가운데
-                    else if (j == rect.backGroundIndex.GetLength(1) - 1 &&
-                                i % rect.height == 0 && i < rect.backGroundIndex.GetLength(0))
+                    else if (j == rect.tile.GetLength(1) - 1 &&
+                                i % rect.rect[0, 0].height == 0 && i < rect.tile.GetLength(0))
                     {
-                        rect.backGroundIndex[i, j] = 11;
+                        rect.tile[i, j].Image = ImageBackGrounds[11].ToString();
+
                     }
                     //┣ = 7
                     //맨 왼쪽 가운데
-                    else if (j == 0 && i % rect.height == 0 && i < rect.backGroundIndex.GetLength(0))
+                    else if (j == 0 && i % rect.rect[0, 0].height == 0 && i < rect.tile.GetLength(0))
                     {
-                        rect.backGroundIndex[i, j] = 7;
+                        rect.tile[i, j].Image = ImageBackGrounds[7].ToString();
+
 
                     }//┃위에껄 다찍고 나머지중 좌표가 너비만큼 떨어졌을 경우 찍어줌
-                    else if (j % rect.width == 0)
+                    else if (j % rect.rect[0, 0].width == 0)
                     {
-                        rect.backGroundIndex[i, j] = 6;
+                        rect.tile[i, j].Image = ImageBackGrounds[6].ToString();
+
                     }
 
 
                     //맨왼쪽 맨위 ┏
                     if (i == 0 && j == 0)
                     {
-                        rect.backGroundIndex[0, 0] = 1;
+                        rect.tile[0, 0].Image = ImageBackGrounds[1].ToString();
                     }
                     //맨오른쪽 맨위 ┓
-                    else if (i == 0 && j == rect.backGroundIndex.GetLength(1) - 1)
+                    else if (i == 0 && j == rect.tile.GetLength(1) - 1)
                     {
-                        rect.backGroundIndex[i, j] = 2;
+                        rect.tile[i, j].Image = ImageBackGrounds[2].ToString();
                     }
                     //맨왼쪽 맨아래 ㄴ
-                    else if (i == rect.backGroundIndex.GetLength(0) - 1 && j == 0)
+                    else if (i == rect.tile.GetLength(0) - 1 && j == 0)
                     {
-                        rect.backGroundIndex[i, j] = 3;
+                        rect.tile[i, j].Image = ImageBackGrounds[3].ToString();
                     }
                     //맨 오른쪽 맨아래 ┛
-                    else if (i == rect.backGroundIndex.GetLength(0) - 1 && j == rect.backGroundIndex.GetLength(1) - 1)
+                    else if (i == rect.tile.GetLength(0) - 1 && j == rect.tile.GetLength(1) - 1)
                     {
-                        rect.backGroundIndex[i, j] = 4;
+                        rect.tile[i, j].Image = ImageBackGrounds[4].ToString();
                     }
                     //가로줄 5번째마다 ㅜ 하나씩 놓아줌-맨윗줄 일떄만 
-                    else if (j % rect.width == 0 && (i == 0))
+                    else if (j % rect.rect[0,0].width == 0 && (i == 0))
                     {
-                        rect.backGroundIndex[i, j] = 8;
+                        rect.tile[i, j].Image = ImageBackGrounds[8].ToString();
 
                     }
                     //가로줄 5번째마다 ㅗ 하나씩 놓아줌 - 맨아랫줄일때만
-                    else if (j % rect.width == 0 && i == rect.backGroundIndex.GetLength(0) - 1)
+                    else if (j % rect.rect[0, 0].width == 0 && i == rect.tile.GetLength(0) - 1)
                     {
-                        rect.backGroundIndex[i, j] = 10;
+                        rect.tile[i, j].Image = ImageBackGrounds[10].ToString();
 
                     }
 
                 }
             }
 
-            //캐릭터 배열을 string[]에 넣는법
-            char[] chars = new char[rect.backGround[0].Length];
+            ////캐릭터 배열을 string[]에 넣는법
+            //char[] chars = new char[rect.backGround[0].Length];
 
-            for (int i = 0; i < rect.backGroundIndex.GetLength(0); i++)
-            {
-                for (int j = 0; j < rect.backGroundIndex.GetLength(1); j++)
-                {
-                    chars[j] = ImageBackGrounds[rect.backGroundIndex[i, j]];
-                }
+            //for (int i = 0; i < rect.tile.GetLength(0); i++)
+            //{
+            //    for (int j = 0; j < rect.tile.GetLength(1); j++)
+            //    {
+            //        chars[j] = ImageBackGrounds[rect.tile[i, j]];
+            //    }
 
-                //넣기전 초기화
-                rect.backGround[i] = "";
+            //    //넣기전 초기화
+            //    rect.backGround[i] = "";
 
-                for (int j = 0; j < chars.Length; j++)
-                {
-                    rect.backGround[i] += chars[j];
-                }
-                //위와 같음. 
-                //backGround[i] =  new string (chars);
-            }
+            //    for (int j = 0; j < chars.Length; j++)
+            //    {
+            //        rect.backGround[i] += chars[j];
+            //    }
+            //    //위와 같음. 
+            //    //backGround[i] =  new string (chars);
+            //}
 
             //잘나왔나 그리기 테스트용
             //for (int i = 0; i < rect.backGround.GetLength(0); i++)
@@ -859,7 +843,7 @@ namespace _2024Project
         {
             //타일 좌표배정. 
             //타일들 기초세팅.
-            TileSeting(ref tile, rect);
+            TileSeting( tile, rect);
 
             //1~(num x num)까지  랜덤하게 타일 설정.
             //rect[0].value x rect[0].value
@@ -867,7 +851,7 @@ namespace _2024Project
             Random rnd = new Random();
 
             //현재 만드는 타일들의 인덱스 최대값.
-            int maxIndex = (rect.value * rect.value) + 1;
+            int maxIndex = (rect.rect.Length * rect.rect.Length) + 1;
 
 
             /* 테스트용 기본값들.
